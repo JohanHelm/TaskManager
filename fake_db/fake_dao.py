@@ -1,9 +1,10 @@
+import csv
 from abc import ABC, abstractmethod
 from typing import Any
-import csv
 
-from app.settings.initial_settings import PathParams, FakeDBParams
+from app.settings.initial_settings import PathParams
 from app.utils import save_updated_db
+
 
 class AbstractGetOneDAO(ABC):
     @abstractmethod
@@ -43,9 +44,8 @@ class AddOneItemDAO(AbstractAddOneDAO):
             writer.writerow(data)
 
 
-
 class GetOneItemDAO(AbstractGetOneDAO):
-    def get_one(self,  identifier_name: str, identifier_value: Any) -> dict[str, Any] | None:
+    def get_one(self, identifier_name: str, identifier_value: Any) -> dict[str, Any] | None:
         with open(PathParams.fake_db, encoding='utf-8') as file:
             rows = csv.DictReader(file, delimiter=';', quotechar='"')
             for row in rows:
@@ -73,7 +73,11 @@ class DeleteItemDAO(AbstractDeleteOneDAO):
 
 
 class UpdateOneItemDAO(AbstractUpdateOneDAO):
-    def update_one(self, identifier_name: str, identifier_value: Any, data: dict) -> dict[str, Any] | None:
+    def update_one(self,
+                   identifier_name: str,
+                   identifier_value: Any,
+                   data: dict)\
+            -> dict[str, Any] | None:
         task_from_db = None
 
         with open(PathParams.fake_db, "r", encoding="utf-8") as file:

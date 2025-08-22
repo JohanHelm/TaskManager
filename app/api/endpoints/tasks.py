@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, status
 from uuid import uuid4
 
-from app.models.tasks import TaskFromDB, TaskCreate, TaskUpdate
-from fake_db.fake_dao import get_task_dao, TasksDAO
+from fastapi import APIRouter, Depends, HTTPException, status
 
+from app.models.tasks import TaskCreate, TaskFromDB, TaskUpdate
+from fake_db.fake_dao import TasksDAO, get_task_dao
 
 tasks_router = APIRouter(
     prefix="/task",
@@ -70,10 +70,10 @@ async def get_reports_pack(offset: str,
                            limit: str,
                            task_dao: TasksDAO = Depends(get_task_dao),
                            ):
-    tasks_list_from_db = task_dao.get_pack(int(offset),int(limit))
+    tasks_list_from_db = task_dao.get_pack(int(offset), int(limit))
 
     if tasks_list_from_db:
         return tasks_list_from_db
     else:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"Task list is empty")
+                            detail="Task list is empty")

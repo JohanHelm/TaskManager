@@ -2,11 +2,9 @@ import uvicorn
 from fastapi import FastAPI
 
 from app.api.endpoints.tasks import tasks_router
-from app.utils import create_necessary_catalogs, create_fake_db
 from app.settings.initial_settings import AppParams
 from app.settings.logging_settings import configure_logger
-
-
+from app.utils import create_fake_db, create_necessary_catalogs
 
 app = FastAPI()
 

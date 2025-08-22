@@ -1,7 +1,9 @@
-from pydantic import BaseModel, ConfigDict
 import enum
 from typing import Optional
 from uuid import UUID
+
+from pydantic import BaseModel, ConfigDict
+
 
 class StatusEnum(enum.Enum):
     created = "created"

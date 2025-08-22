@@ -1,10 +1,11 @@
-from fastapi.testclient import TestClient
 import pytest
 import pytest_asyncio
+from fastapi.testclient import TestClient
 from httpx import AsyncClient
 
-from main import app
 from fake_db.fake_dao import get_task_dao
+from main import app
+
 
 @pytest_asyncio.fixture
 async def async_client():

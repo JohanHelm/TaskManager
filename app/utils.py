@@ -1,8 +1,8 @@
-import os
 import csv
+import os
 from pathlib import Path
 
-from app.settings.initial_settings import LogParams, PathParams, FakeDBParams
+from app.settings.initial_settings import FakeDBParams, LogParams, PathParams
 
 
 def create_necessary_catalogs():
